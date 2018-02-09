@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class HW4_Work5 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
         while (true) {
             System.out.print("Введіть дійсне число A ");
             if (sc.hasNextDouble()) {
@@ -46,8 +45,5 @@ public class HW4_Work5 {
         } else {
             System.out.println("Мінімальним дійсним числом за модулем є число |C| = " + Math.abs(c1));
         }
-
-
-
     }
 }
