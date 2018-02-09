@@ -1,4 +1,4 @@
-package JavaCore;
+package JavaCore_HomeWork4;
 
 import java.util.Scanner;
 
