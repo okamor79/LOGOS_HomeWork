@@ -7,6 +7,7 @@ public class HW3_Work7 {
             myArray[i - 1] = fibonachi(i);
             System.out.print(myArray[i - 1] + " ");
         }
+        System.out.println(fibonachi(7));
     }
 
     static int fibonachi(int n) {
