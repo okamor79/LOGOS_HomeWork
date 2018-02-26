@@ -25,6 +25,18 @@ public class Car {
         this.wheel = wheel;
     }
 
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public void setHelm(Helm helm) {
+        this.helm = helm;
+    }
+
+    public void setWheel(Wheel wheel) {
+        this.wheel = wheel;
+    }
+
     public String getColor() {
         return color;
     }

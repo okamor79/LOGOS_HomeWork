@@ -10,9 +10,14 @@ public class Main {
 
         car.add(new Car("red", "sedan", 200, new Body("Sedan"), new Helm("Wood"), new Wheel(15, "Nokian")));
         car.add(new Car("red", "sedan", 200, new Body("Sedan"), new Helm("Wood"), new Wheel(15, "Nokian")));
+        car.add(new Car("rwwwed", "sedan", 200, new Body("Sedan"), new Helm("Wood"), new Wheel(15, "Nokian")));
+        car.add(new Car("resdfd", "sedan", 200, new Body("Sedan"), new Helm("Wood"), new Wheel(15, "Nokian")));
         car.add(new Car("red", "sedan", 200, new Body("Sedan"), new Helm("Wood"), new Wheel(15, "Nokian")));
-        car.add(new Car("red", "sedan", 200, new Body("Sedan"), new Helm("Wood"), new Wheel(15, "Nokian")));
-        car.add(new Car("red", "sedan", 200, new Body("Sedan"), new Helm("Wood"), new Wheel(15, "Nokian")));
+
+
+
+
+
         car.add(new Car("red", "sedan", 200, new Body("Sedan"), new Helm("Wood"), new Wheel(15, "Nokian")));
 
 
@@ -22,6 +27,10 @@ public class Main {
 //        car.setMaxSpeed(280);
         System.out.println(car);
 
+        car.get(3).setBody("sdf");
+//        car.get(2).getBody()
+
+        System.out.println(car);
 
     }
 }

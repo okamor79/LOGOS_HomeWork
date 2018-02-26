@@ -16,6 +16,8 @@ public class Body {
         this.type = type;
     }
 
+
+
     @Override
     public String toString() {
         return "Body{" +

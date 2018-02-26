@@ -10,6 +10,14 @@ public class Wheel {
         this.name = name;
     }
 
+    public void setRadius(int radius) {
+        this.radius = radius;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return "Wheel{" +
