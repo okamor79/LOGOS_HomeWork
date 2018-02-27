@@ -25,7 +25,7 @@ public class Car {
         this.wheel = wheel;
     }
 
-    public void setBody(String body) {
+    public void setBody(Body body) {
         this.body = body;
     }
 

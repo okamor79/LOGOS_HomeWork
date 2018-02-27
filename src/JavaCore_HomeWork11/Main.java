@@ -20,15 +20,10 @@ public class Main {
 
         car.add(new Car("red", "sedan", 200, new Body("Sedan"), new Helm("Wood"), new Wheel(15, "Nokian")));
 
-
-//        Car car = new Car(new Body("Sedan"), new Helm("Wood"), new Wheel(15,"Nokian"));
-//        car.setColor("Red");
-//        car.setModel("Porsche");
-//        car.setMaxSpeed(280);
         System.out.println(car);
 
-        car.get(3).setBody("sdf");
-//        car.get(2).getBody()
+        car.get(3).setBody(new Body("sdfsdfsdf"));
+
 
         System.out.println(car);
 
