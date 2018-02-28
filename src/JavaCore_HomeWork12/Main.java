@@ -28,6 +28,8 @@ public class Main {
                 case "3":
                     printList();
                     System.out.println("Введіть ім'я студента на видалення");
+                    String name = sc.next();
+                    removeStudentByName(name);
 
                     break;
                 case "9":
@@ -47,7 +49,7 @@ public class Main {
             return;
         } else {
             for (ListIterator i = univer.listIterator(); i.hasNext(); ) {
-                System.out.println(i.nextIndex() + " " +i.next());
+                System.out.println(i.nextIndex() + " " + i.next());
             }
             System.out.println();
         }
@@ -67,10 +69,21 @@ public class Main {
         System.out.println();
     }
 
+    public static void removeStudentByName(String name) {
+        for (ListIterator<Student> iterByName = univer.listIterator(); iterByName.hasNext();) {
+            if (univer.get(iterByName.nextIndex()).getLastName().equals(name)) {
+                univer.remove(iterByName.nextIndex());
+
+            }
+        }
+
+        printList();
+    }
+
     public static void removeStudentByIndex(int index) {
 
-        for(ListIterator<Student> i = univer.listIterator(); i.hasNext();) {
-            if(i.nextIndex() == index) {
+        for (ListIterator<Student> i = univer.listIterator(); i.hasNext(); ) {
+            if (i.nextIndex() == index) {
                 i.remove();
             }
         }
