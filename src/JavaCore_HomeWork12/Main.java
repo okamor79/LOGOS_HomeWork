@@ -4,30 +4,89 @@ import java.util.*;
 
 public class Main {
 
+    static List<Student> univer = new ArrayList<>();
+    static Scanner sc = new Scanner(System.in);
+
     public static void main(String[] args) {
 
         Random random = new Random();
-        Scanner sc = new Scanner(System.in);
 
-        List<Student> univer = new ArrayList<>();
-        univer.add(new Student("Oleg", "Kaminskyi", random(7)+15, Student.MALE, 1, "KI"));
-        univer.add(new Student("Oleg", "Kaminskyi", random(7)+15, Student.MALE, 1, "KI"));
-        univer.add(new Student("Oleg", "Kaminskyi", random(7)+15, Student.MALE, 1, "KI"));
-        univer.add(new Student("Oleg", "Kaminskyi", random(7)+15, Student.MALE, 1, "KI"));
-        univer.add(new Student("Oleg", "Kaminskyi", random(7)+15, Student.MALE, 1, "KI"));
-        univer.add(new Student("Oleg", "Kaminskyi", random(7)+15, Student.MALE, 1, "KI"));
-        univer.add(new Student("Oleg", "Kaminskyi", random(7)+15, Student.MALE, 1, "KI"));
-        univer.add(new Student("Oleg", "Kaminskyi", random(7)+15, Student.MALE, 1, "KI"));
-        univer.add(new Student("Oleg", "Kaminskyi", random(7)+15, Student.MALE, 1, "KI"));
-        univer.add(new Student("Oleg", "Kaminskyi", random(7)+15, Student.MALE, 1, "KI"));
+        while (true) {
+            printMenu();
 
+            String choise = sc.next();
+            switch (choise) {
+                case "1":
+                    addNewStudent();
+                    break;
+                case "2":
+                    printList();
+                    System.out.println("Введіть індекс студента на видалення");
+                    int index = sc.nextInt();
+                    removeStudentByIndex(index);
+                    break;
+                case "3":
+                    printList();
+                    System.out.println("Введіть ім'я студента на видалення");
 
-
-
-
+                    break;
+                case "9":
+                    printList();
+                    break;
+                case "0":
+                    return;
+            }
+        }
 
     }
 
+    public static void printList() {
+        if (!univer.iterator().hasNext()) {
+            System.out.println("Список пустий");
+            System.out.println();
+            return;
+        } else {
+            for (ListIterator i = univer.listIterator(); i.hasNext(); ) {
+                System.out.println(i.nextIndex() + " " +i.next());
+            }
+            System.out.println();
+        }
+    }
+
+    public static void addNewStudent() {
+        System.out.println("Введіть прізвище ");
+        String lastName = sc.next();
+        System.out.println("Введіть ім'я ");
+        String firstName = sc.next();
+        System.out.println("Введіть спеціальність ");
+        String group = sc.next();
+        System.out.println("Введіть курс ");
+        int course = sc.nextInt();
+        univer.add(new Student(lastName, firstName, course, group));
+        System.out.println("Студента додано");
+        System.out.println();
+    }
+
+    public static void removeStudentByIndex(int index) {
+
+        for(ListIterator<Student> i = univer.listIterator(); i.hasNext();) {
+            if(i.nextIndex() == index) {
+                i.remove();
+            }
+        }
+        System.out.println("Студента видалено");
+        printList();
+
+    }
+
+    public static void printMenu() {
+        System.out.println("Виберіть дію:");
+        System.out.println("1 - Додати нового студента");
+        System.out.println("2 - Видалити студента по індексу");
+        System.out.println("3 - Видалити студента по імені");
+        System.out.println("9 - Друк списку");
+        System.out.println("0 - Вихід");
+    }
 
 
 }
