@@ -27,10 +27,10 @@ public class Main {
                     break;
                 case "3":
                     printList();
-                    System.out.println("Введіть ім'я студента на видалення");
+                    System.out.println("Введіть прізвище студента на видалення");
                     String name = sc.next();
                     removeStudentByName(name);
-
+                    printList();
                     break;
                 case "9":
                     printList();
@@ -43,16 +43,23 @@ public class Main {
     }
 
     public static void printList() {
-        if (!univer.iterator().hasNext()) {
+
+        if (!univer.isEmpty()) {
+            ListIterator i = univer.listIterator(univer.size());
+            univer.forEach(System.out::println);
+        } else {
             System.out.println("Список пустий");
             System.out.println();
             return;
-        } else {
-            for (ListIterator i = univer.listIterator(); i.hasNext(); ) {
-                System.out.println(i.nextIndex() + " " + i.next());
-            }
-            System.out.println();
         }
+
+//        if (!univer.iterator().hasNext()) {
+//        } else {
+//            for (ListIterator i = univer.listIterator(); i.hasNext(); ) {
+//                System.out.println(i.nextIndex() + " " + i.next());
+//            }
+//            System.out.println();
+//        }
     }
 
     public static void addNewStudent() {
@@ -70,22 +77,25 @@ public class Main {
     }
 
     public static void removeStudentByName(String name) {
-        for (ListIterator<Student> iterByName = univer.listIterator(); iterByName.hasNext();) {
-            if (univer.get(iterByName.nextIndex()).getLastName().equals(name)) {
-                univer.remove(iterByName.nextIndex());
-
+        ListIterator<Student> iter = univer.listIterator();
+        while (iter.hasNext()) {
+            Student s = iter.next();
+            if( s.getFirstName().equalsIgnoreCase(name)) {
+                iter.remove();
             }
         }
-
-        printList();
     }
 
     public static void removeStudentByIndex(int index) {
+        ListIterator<Student> i = univer.listIterator();
 
-        for (ListIterator<Student> i = univer.listIterator(); i.hasNext(); ) {
+        while (i.hasNext()) {
+            Student s = i.next();
+            System.out.println(i.nextIndex());
             if (i.nextIndex() == index) {
                 i.remove();
             }
+
         }
         System.out.println("Студента видалено");
         printList();
@@ -96,7 +106,7 @@ public class Main {
         System.out.println("Виберіть дію:");
         System.out.println("1 - Додати нового студента");
         System.out.println("2 - Видалити студента по індексу");
-        System.out.println("3 - Видалити студента по імені");
+        System.out.println("3 - Видалити студента по прізвищу");
         System.out.println("9 - Друк списку");
         System.out.println("0 - Вихід");
     }
