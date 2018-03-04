@@ -21,6 +21,9 @@ public class Main {
                 case "1":
                     addNewCommodity();
                     break;
+                case "2":
+                    removeCommodityByCode();
+                    break;
                 case "9" :
                     printList();
                     break;
