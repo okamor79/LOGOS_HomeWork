@@ -24,6 +24,9 @@ public class Main {
                 case "2":
                     removeCommodityByCode();
                     break;
+                case"3":
+                    replaceCommodity();
+                    break;
                 case "9" :
                     printList();
                     break;
@@ -60,6 +63,33 @@ public class Main {
         System.out.printf("Введіть вартість товару  ");
         double price = sc.nextDouble();
         set.add(new Commodity(id,title,code,price));
+    }
+
+    public static void replaceCommodity() {
+        printList();
+        System.out.println();
+        System.out.printf("Введіть код товару для заміни");
+        String codeReplace = sc.next();
+        System.out.println("Введіть новий товар: ");
+        System.out.printf("Введіть ID товару");
+        int id = sc.nextInt();
+        System.out.printf("Введіть назву товару   ");
+        String title = sc.next();
+        System.out.printf("Введіть код товару   ");
+        String codeNew = sc.next();
+        System.out.printf("Введіть вартість товару  ");
+        double price = sc.nextDouble();
+        Iterator<Commodity> iter = set.iterator();
+        while(iter.hasNext()) {
+            Commodity c = iter.next();
+            if(c.getCode().equalsIgnoreCase(codeReplace)) {
+              c.setId(id);
+              c.setTitle(title);
+              c.setCode(codeNew);
+              c.setPrice(price);
+            }
+        }
+
     }
 
     public static void removeCommodityByCode() {
