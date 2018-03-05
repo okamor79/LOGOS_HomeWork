@@ -6,7 +6,7 @@ public class CommoditySortByCode implements Comparator<Commodity> {
     private boolean desc;
 
     public CommoditySortByCode(boolean desc) {
-        this.desc = desc
+        this.desc = desc;
     }
 
     public CommoditySortByCode() {
