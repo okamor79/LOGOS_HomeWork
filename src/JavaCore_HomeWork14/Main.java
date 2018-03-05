@@ -18,13 +18,16 @@ public class Main {
                 case "1":
                     addNewCommodity();
                     break;
-                case "2":
+
+                    case "2":
                     removeCommodityByCode();
                     break;
                 case "3":
                     replaceCommodity();
                     break;
                 case "9":
+                    List<Commodity> listSort = new ArrayList<>();
+                    listSort.addAll(set);
                     System.out.println("1 - Сортувати по коду (зростаючий)");
                     System.out.println("2 - Сортувати по коду (спадаючий)");
                     System.out.println("3 - Сортувати по назві (зростаючий)");
@@ -35,20 +38,27 @@ public class Main {
                     String choisePrint = sc.next();
                     switch (choisePrint) {
                         case "1":
-                            List<Commodity> codeSortAsc = new ArrayList<>(new CommoditySortByCode());
-                            codeSortAsc.addAll(set);
-                            codeSortAsc.forEach(System.out::println);
+                            listSort.sort(new CommoditySortByCode());
                             break;
                         case "2":
-                            List<Commodity> codeSortDesc = new ArrayList<>(new CommoditySortByCode(true));
-                            codeSortDesc.addAll(set);
-                            codeSortDesc.forEach(System.out::println);
+                            listSort.sort(new CommoditySortByCode(true));
+                            break;
+                        case "3":
+                            listSort.sort(new CommoditySortByTitle());
+                            break;
+                        case "4":
+                            listSort.sort(new CommoditySortByTitle(true));
+                            break;
+                        case "5":
+                            listSort.sort(new CommoditySortByPrice());
+                            break;
+                        case "6":
+                            listSort.sort(new CommoditySortByPrice(true));
                             break;
                         case "0":
                             break;
                     }
-
-                    printList();
+                    listSort.forEach(System.out::println);
                     break;
                 case "0":
                     return;
