@@ -10,24 +10,44 @@ public class Main {
     static Set<Commodity> set = new TreeSet<>();
 
     public static void main(String[] args) {
-
-
-
-        while(true){
+        while (true) {
             printMenu();
             System.out.print("Зробіть ваш вибір:  ");
             String choise = sc.next();
-            switch(choise) {
+            switch (choise) {
                 case "1":
                     addNewCommodity();
                     break;
                 case "2":
                     removeCommodityByCode();
                     break;
-                case"3":
+                case "3":
                     replaceCommodity();
                     break;
-                case "9" :
+                case "9":
+                    System.out.println("1 - Сортувати по коду (зростаючий)");
+                    System.out.println("2 - Сортувати по коду (спадаючий)");
+                    System.out.println("3 - Сортувати по назві (зростаючий)");
+                    System.out.println("4 - Сортувати по назві (спадаючий)");
+                    System.out.println("5 - Сортувати за ціною (зростаючий)");
+                    System.out.println("6 - Сортувати за ціною (спадаючий)");
+                    System.out.println("0 - Повернутись на попереднє меню");
+                    String choisePrint = sc.next();
+                    switch (choisePrint) {
+                        case "1":
+                            List<Commodity> codeSortAsc = new ArrayList<>(new CommoditySortByCode());
+                            codeSortAsc.addAll(set);
+                            codeSortAsc.forEach(System.out::println);
+                            break;
+                        case "2":
+                            List<Commodity> codeSortDesc = new ArrayList<>(new CommoditySortByCode(true));
+                            codeSortDesc.addAll(set);
+                            codeSortDesc.forEach(System.out::println);
+                            break;
+                        case "0":
+                            break;
+                    }
+
                     printList();
                     break;
                 case "0":
@@ -36,7 +56,7 @@ public class Main {
         }
     }
 
-    public static void printList(){
+    public static void printList() {
         set.forEach(System.out::println);
     }
 
@@ -62,7 +82,7 @@ public class Main {
         String code = sc.next();
         System.out.printf("Введіть вартість товару  ");
         double price = sc.nextDouble();
-        set.add(new Commodity(id,title,code,price));
+        set.add(new Commodity(id, title, code, price));
     }
 
     public static void replaceCommodity() {
@@ -80,13 +100,13 @@ public class Main {
         System.out.printf("Введіть вартість товару  ");
         double price = sc.nextDouble();
         Iterator<Commodity> iter = set.iterator();
-        while(iter.hasNext()) {
+        while (iter.hasNext()) {
             Commodity c = iter.next();
-            if(c.getCode().equalsIgnoreCase(codeReplace)) {
-              c.setId(id);
-              c.setTitle(title);
-              c.setCode(codeNew);
-              c.setPrice(price);
+            if (c.getCode().equalsIgnoreCase(codeReplace)) {
+                c.setId(id);
+                c.setTitle(title);
+                c.setCode(codeNew);
+                c.setPrice(price);
             }
         }
 
@@ -96,7 +116,7 @@ public class Main {
         System.out.printf("Введіть код товару на видалення ");
         String s = sc.next();
         Iterator<Commodity> iter = set.iterator();
-        while(iter.hasNext()){
+        while (iter.hasNext()) {
             Commodity c = iter.next();
             if (c.getCode().equalsIgnoreCase(s)) {
                 iter.remove();
