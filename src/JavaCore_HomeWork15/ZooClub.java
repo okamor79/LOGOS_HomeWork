@@ -25,6 +25,12 @@ public class ZooClub {
                 case "3":
                     removePetFromPerson();
                     break;
+                case "4":
+                    removePerson();
+                    break;
+                case "5":
+                    removePets();
+                    break;
                 case "9":
                     System.out.println(zooClub);
                     break;
@@ -51,7 +57,7 @@ public class ZooClub {
     public void addNewPerson() {
         System.out.printf("Введіть ім'я нового учасника ");
         String personName = sc.next();
-        if(zooClub.containsKey(new Person(personName))){
+        if (zooClub.containsKey(new Person(personName))) {
             System.out.println("Такий учасник вже існує");
         } else {
             zooClub.put(new Person(personName), new ArrayList<>());
@@ -62,7 +68,7 @@ public class ZooClub {
         System.out.printf("Введіть ім'я учасника клубу  ");
         String personName = sc.next();
         System.out.println();
-        if(zooClub.containsKey(new Person(personName))) {
+        if (zooClub.containsKey(new Person(personName))) {
             System.out.printf("Введіть вид тварини  ");
             String petClass = sc.next();
             System.out.printf("Введіть кличку тварини  ");
@@ -78,19 +84,51 @@ public class ZooClub {
     public void removePetFromPerson() {
         System.out.println("Введіть ім'я учасника клубу  ");
         Person p = new Person(sc.next());
-        if(zooClub.containsKey(p)) {
-            List<Pets> pet = new ArrayList<>();
+        if (zooClub.containsKey(p)) {
+            Set<Pets> pet = new HashSet<>();
             pet.addAll(zooClub.get(p));
             System.out.println("Перелік тврин учасника клубу - " + p.getPersonName());
             pet.forEach(System.out::println);
             System.out.println();
-            System.out.printf("Введіть вид тварини для видалення");
-
-            System.out.printf("Введіть кличку тварини для видалення");
-
+            System.out.printf("Введіть вид тварини для видалення  ");
+            String petClass = sc.next();
+            System.out.printf("Введіть кличку тварини для видалення  ");
+            String petName = sc.next();
+            Iterator<Map.Entry<Person, List<Pets>>> iter = zooClub.entrySet().iterator();
+            while(iter.hasNext()){
+                Map.Entry<Person, List<Pets>> i = iter.next();
+                Iterator<Pets> listIter = i.getValue().iterator();
+                while(listIter.hasNext()) {
+                    Pets pets = listIter.next();
+                    if(pets.getPetsClass().equalsIgnoreCase(petClass) && pets.getPetsName().equalsIgnoreCase(petName)) {
+                        listIter.remove();
+                    }
+                }
+            }
         } else {
             System.out.println("Такого учасника в клубі немає.");
         }
+    }
+
+    public void removePerson() {
+        System.out.println("Введіть ім'я учасника для видалення ");
+        Person p = new Person(sc.next());
+        if (zooClub.containsKey(p)) {
+            zooClub.remove(p);
+        } else {
+            System.out.println("Такого учасника в клубі не має");
+        }
+
+    }
+
+    public void removePets() {
+        System.out.println("Введіть тип тварини для видалення з клубу  ");
+        String petClass = sc.next();
+        Set<Person> keys = zooClub.keySet();
+
+
+
+
     }
 
 
