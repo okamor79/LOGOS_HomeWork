@@ -22,6 +22,9 @@ public class ZooClub {
                 case "2":
                     addNewPetsToPerson();
                     break;
+                case "3":
+                    removePetFromPerson();
+                    break;
                 case "9":
                     System.out.println(zooClub);
                     break;
@@ -30,8 +33,6 @@ public class ZooClub {
                     return;
             }
         }
-
-
     }
 
     public void printMenu() {
@@ -69,6 +70,24 @@ public class ZooClub {
             System.out.printf("Введіть вік тварини  ");
             int petAge = sc.nextInt();
             zooClub.get(new Person(personName)).add(new Pets(petName, petClass, petAge));
+        } else {
+            System.out.println("Такого учасника в клубі немає.");
+        }
+    }
+
+    public void removePetFromPerson() {
+        System.out.println("Введіть ім'я учасника клубу  ");
+        Person p = new Person(sc.next());
+        if(zooClub.containsKey(p)) {
+            List<Pets> pet = new ArrayList<>();
+            pet.addAll(zooClub.get(p));
+            System.out.println("Перелік тврин учасника клубу - " + p.getPersonName());
+            pet.forEach(System.out::println);
+            System.out.println();
+            System.out.printf("Введіть вид тварини для видалення");
+
+            System.out.printf("Введіть кличку тварини для видалення");
+
         } else {
             System.out.println("Такого учасника в клубі немає.");
         }
