@@ -34,7 +34,6 @@ public class ZooClub {
                 case "9":
                     System.out.println(zooClub);
                     break;
-
                 case "0":
                     return;
             }
@@ -118,18 +117,21 @@ public class ZooClub {
         } else {
             System.out.println("Такого учасника в клубі не має");
         }
-
     }
 
     public void removePets() {
         System.out.println("Введіть тип тварини для видалення з клубу  ");
         String petClass = sc.next();
-        Set<Person> keys = zooClub.keySet();
-
-
-
-
+        Iterator<Map.Entry<Person, List<Pets>>> iter = zooClub.entrySet().iterator();
+        while(iter.hasNext()) {
+            Map.Entry<Person, List<Pets>> i = iter.next();
+            Iterator<Pets> p = i.getValue().iterator();
+            while(p.hasNext()) {
+                Pets pets = p.next();
+                if (pets.getPetsClass().equalsIgnoreCase(petClass)) {
+                    p.remove();
+                }
+            }
+        }
     }
-
-
 }
