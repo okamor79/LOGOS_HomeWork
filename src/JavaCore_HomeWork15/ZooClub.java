@@ -134,4 +134,11 @@ public class ZooClub {
             }
         }
     }
+
+    @Override
+    public String toString() {
+        return "ZooClub{" +
+                "zooClub=" + zooClub +
+                '}';
+    }
 }
