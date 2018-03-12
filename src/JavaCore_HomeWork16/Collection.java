@@ -1,83 +1,83 @@
 package JavaCore_HomeWork16;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+
+interface MyIterator extends Iterator {};
 
 public class Collection {
-    private List<Object> arr;
+    static Random rnd = new Random();
+    private Object[] arr;
 
-    public Collection(List<Object> arr) {
-        this.arr = new ArrayList<>();
+    public Collection(int arr) {
+        this.arr = new Object[arr];
+        for (int i = 0; i < arr; i++) {
+            this.arr[i] = rnd.nextInt(50);
+        }
+    }
+
+    public Object[] getArr() {
+        return arr;
+    }
+
+    public void setArr(Object[] arr) {
+        this.arr = arr;
     }
 
     @Override
     public String toString() {
         return "Collection{" +
-                "arr=" + arr +
+                "arr=" + Arrays.toString(arr) +
                 '}';
     }
 
-    public List<Object> getArr() {
-        return arr;
-    }
-
-    public void setArr(List<Object> arr) {
-        this.arr = arr;
-    }
-
-    public void printFirstToLast() {
-        Iterator iter = this.new firstToLastIterator();
+    /*
+    * Перший клас виводив значення масиву від першого до останнього. Зробити заміну непарних елементів на нуль і вивести на екран даний масив.
+    */
+    public void printFTL() {
+        MyIterator iter = this.new iteratorFirstToLast();
         while(iter.hasNext()) {
-                System.out.println(iter.next());
+            System.out.print(iter.next() + " ");
         }
     }
 
-    public void printLastToString() {
-        Iterator iter = this.new lastToFirstIterator();
-        while(iter.hasNext()) {
-            System.out.println(iter.next());
-        }
-    }
-
-    interface Iterator extends java.util.Iterator<Object> { }
-
-    private class firstToLastIterator implements Iterator {
-        private int nextIndex = 0;
-
+    private class iteratorFirstToLast implements MyIterator {
+        int nextIndex = 0;
         @Override
         public boolean hasNext() {
-            return (nextIndex < arr.size() );
+            return (nextIndex < arr.length);
         }
 
         @Override
         public Object next() {
-            Object retValue;
-            if(nextIndex % 2 == 0) {
-                retValue = 0;
-            } else {
-                retValue = arr.get(nextIndex).toString();
-            }
-            nextIndex += 1;
+            Object retValue = (nextIndex % 2 == 0) ? 0 : arr[nextIndex];
+            nextIndex++;
             return retValue;
         }
     }
 
-    private class lastToFirstIterator implements Iterator {
-        private int nextIndex = arr.size() - 1;
 
+    /*
+    * Другий клас виводив від останнього до першого значення через одну цифру.
+    */
+    public void printLTF() {
+        MyIterator iter = this.new iteratorLastToFirst();
+        while(iter.hasNext()) {
+            System.out.print(iter.next() + " ");
+        }
+    }
+
+    private class iteratorLastToFirst implements MyIterator {
+        int nextIndex = arr.length - 1;
         @Override
         public boolean hasNext() {
             return (nextIndex > 0);
         }
-
         @Override
         public Object next() {
-            Object retValue;
-            retValue = arr.get(nextIndex).toString();
+            Object retValue = arr[nextIndex];
             nextIndex -= 2;
             return retValue;
         }
-
     }
 
 }
