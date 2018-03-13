@@ -100,5 +100,25 @@ public class Collection {
         anon.thirdOddElement();
     }
 
+    /*
+    * Пройтись від першого до останнього елементу масиву, перевірити кожен п’ятий елемент масиву, якщо він парний то відняти від нього число 100, і вивести на консоль ці числа.
+    */
+    public void printFiveEvenElement(){
+        class Reduce100 {
+            int retValue;
+            public Reduce100(int retValue) {
+                this.retValue = retValue;
+                System.out.print(this.retValue - 100 + " ");
+            }
+        }
+        for (int i = 0; i < arr.length; i += 5){
+            if(Integer.valueOf((Integer) arr[i]).intValue() % 2 == 0){
+                Reduce100 r = new Reduce100(Integer.valueOf((Integer) arr[i]).intValue());
+
+            }
+        }
+
+    }
+
 
 }
