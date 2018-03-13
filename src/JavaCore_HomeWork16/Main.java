@@ -7,6 +7,9 @@ public class Main {
         col.printFTL();
         System.out.println();
         col.printLTF();
+        System.out.println("---------------------");
+        System.out.println();
+        col.printThirdOddElement();
 
 
     }

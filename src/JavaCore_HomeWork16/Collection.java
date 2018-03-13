@@ -3,6 +3,9 @@ package JavaCore_HomeWork16;
 import java.util.*;
 
 interface MyIterator extends Iterator {};
+interface Anonym {
+    void thirdOddElement();
+};
 
 public class Collection {
     static Random rnd = new Random();
@@ -79,5 +82,23 @@ public class Collection {
             return retValue;
         }
     }
+
+    /*
+    * Прогнати від останнього до першого елементу масиву. Перевірити кожен третій елемент масиву від останнього чи він непарний, якщо так то вивести дані елементи на консоль.
+    */
+    public void printThirdOddElement() {
+        Anonym anon = new Anonym() {
+            @Override
+            public void thirdOddElement() {
+                for (int i = arr.length - 1; i > 0; i -= 3) {
+                        if(Integer.valueOf((Integer) arr[i]).intValue() % 2 != 0){
+                            System.out.print(arr[i] + " ");
+                        }
+                    }
+            }
+        };
+        anon.thirdOddElement();
+    }
+
 
 }
