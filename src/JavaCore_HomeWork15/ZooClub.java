@@ -95,6 +95,7 @@ public class ZooClub {
             String petName = sc.next();
             Iterator<Map.Entry<Person, List<Pets>>> iter = zooClub.entrySet().iterator();
             while(iter.hasNext()){
+
                 Map.Entry<Person, List<Pets>> i = iter.next();
                 Iterator<Pets> listIter = i.getValue().iterator();
                 while(listIter.hasNext()) {
