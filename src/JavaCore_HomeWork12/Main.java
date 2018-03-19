@@ -95,11 +95,9 @@ public class Main {
             if (i.nextIndex() == index) {
                 i.remove();
             }
-
         }
         System.out.println("Студента видалено");
         printList();
-
     }
 
     public static void printMenu() {
