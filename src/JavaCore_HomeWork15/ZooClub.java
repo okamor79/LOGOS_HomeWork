@@ -1,9 +1,11 @@
 package JavaCore_HomeWork15;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class ZooClub {
+public class ZooClub implements Serializable {
 
+    private static final long serialVersionUID = 3000862590929626649L;
     private Map<Person, List<Pets>> zooClub;
 
     private static Scanner sc = new Scanner(System.in);
@@ -30,6 +32,9 @@ public class ZooClub {
                     break;
                 case "5":
                     removePets();
+                    break;
+                case "6":
+                    fileStreamMenu();
                     break;
                 case "9":
                     System.out.println(zooClub);
@@ -119,6 +124,24 @@ public class ZooClub {
         } else {
             System.out.println("Такого учасника в клубі не має");
         }
+    }
+
+    public void fileStreamMenu(){
+        while(true){
+            System.out.println();
+            System.out.println("1 - Дописати в блокнот");
+            System.out.println("2 - Перезаписати в блокнот");
+            System.out.println("3 - Зчитати з блонкону і вивести");
+            System.out.println("4 - Провести серіалізацію");
+            System.out.println("5 - Провести десеріалізацію");
+            System.out.println("0 - Повернутись в попереднє меню");
+            System.out.println("=====================================================");
+            System.out.printf("Оберіть дію:  ");
+            switch(sc.next()) {
+                case "0": return;
+            }
+        }
+//        System.out.println("sfsf");
     }
 
     public void removePets() {

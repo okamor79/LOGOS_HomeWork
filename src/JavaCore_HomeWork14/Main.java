@@ -18,8 +18,7 @@ public class Main {
                 case "1":
                     addNewCommodity();
                     break;
-
-                    case "2":
+                case "2":
                     removeCommodityByCode();
                     break;
                 case "3":
@@ -71,7 +70,6 @@ public class Main {
     }
 
     public static void printMenu() {
-
         System.out.println("Виберіть дію:");
         System.out.println(" 1 - Додати товар");
         System.out.println(" 2 - Видалити товар");
@@ -119,7 +117,6 @@ public class Main {
                 c.setPrice(price);
             }
         }
-
     }
 
     public static void removeCommodityByCode() {
@@ -131,8 +128,6 @@ public class Main {
             if (c.getCode().equalsIgnoreCase(s)) {
                 iter.remove();
             }
-
         }
     }
-
 }
