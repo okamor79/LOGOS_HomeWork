@@ -68,6 +68,10 @@ public class Pets {
         return true;
     }
 
+    public String forWrite() {
+        return petsClass + "%%" + petsName + "%%" + petsAge + "\n";
+    }
+
     @Override
     public String toString() {
         return petsClass + " ->   Кличка тварини - " + petsName + ", Вік тварини - " + petsAge;

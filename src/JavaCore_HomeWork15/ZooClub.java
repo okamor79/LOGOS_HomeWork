@@ -47,6 +47,7 @@ public class ZooClub {
         System.out.println("3 - Видалити тваринку з учасника клубу");
         System.out.println("4 - Видалити учасника клубу");
         System.out.println("5 - Видалити конкретну тваринку зі всіх власників");
+        System.out.println("6 - Завантажити/збереги файл");
         System.out.println("9 - Вивести на екран зооклуб");
         System.out.println("0 - Вийти з програми");
         System.out.println("=====================================================");
