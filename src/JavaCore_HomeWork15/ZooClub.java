@@ -1,5 +1,9 @@
 package JavaCore_HomeWork15;
 
+import com.sun.org.apache.xpath.internal.SourceTree;
+
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 
@@ -14,7 +18,7 @@ public class ZooClub implements Serializable {
         zooClub = new HashMap<>();
     }
 
-    public void Start() {
+    public void Start() throws IOException {
         while (true) {
             printMenu();
             switch (sc.next()) {
@@ -100,13 +104,13 @@ public class ZooClub implements Serializable {
             System.out.printf("Введіть кличку тварини для видалення  ");
             String petName = sc.next();
             Iterator<Map.Entry<Person, List<Pets>>> iter = zooClub.entrySet().iterator();
-            while(iter.hasNext()){
+            while (iter.hasNext()) {
 
                 Map.Entry<Person, List<Pets>> i = iter.next();
                 Iterator<Pets> listIter = i.getValue().iterator();
-                while(listIter.hasNext()) {
+                while (listIter.hasNext()) {
                     Pets pets = listIter.next();
-                    if(pets.getPetsClass().equalsIgnoreCase(petClass) && pets.getPetsName().equalsIgnoreCase(petName)) {
+                    if (pets.getPetsClass().equalsIgnoreCase(petClass) && pets.getPetsName().equalsIgnoreCase(petName)) {
                         listIter.remove();
                     }
                 }
@@ -126,8 +130,8 @@ public class ZooClub implements Serializable {
         }
     }
 
-    public void fileStreamMenu(){
-        while(true){
+    public void fileStreamMenu() throws IOException {
+        while (true) {
             System.out.println();
             System.out.println("1 - Дописати в блокнот");
             System.out.println("2 - Перезаписати в блокнот");
@@ -137,8 +141,15 @@ public class ZooClub implements Serializable {
             System.out.println("0 - Повернутись в попереднє меню");
             System.out.println("=====================================================");
             System.out.printf("Оберіть дію:  ");
-            switch(sc.next()) {
-                case "0": return;
+            switch (sc.next()) {
+                case "1":
+                    outNotebookAppend();
+                    break;
+                case "2":
+                    outNotebookRewrite();
+                    break;
+                case "0":
+                    return;
             }
         }
 //        System.out.println("sfsf");
@@ -148,16 +159,44 @@ public class ZooClub implements Serializable {
         System.out.println("Введіть тип тварини для видалення з клубу  ");
         String petClass = sc.next();
         Iterator<Map.Entry<Person, List<Pets>>> iter = zooClub.entrySet().iterator();
-        while(iter.hasNext()) {
+        while (iter.hasNext()) {
             Map.Entry<Person, List<Pets>> i = iter.next();
             Iterator<Pets> p = i.getValue().iterator();
-            while(p.hasNext()) {
+            while (p.hasNext()) {
                 Pets pets = p.next();
                 if (pets.getPetsClass().equalsIgnoreCase(petClass)) {
                     p.remove();
                 }
             }
         }
+    }
+
+
+    public void outNotebookAppend() throws IOException {
+        FileWriter fw = new FileWriter("zooClub.txt", true);
+        Iterator<Map.Entry<Person, List<Pets>>> iter = zooClub.entrySet().iterator();
+        while (iter.hasNext()) {
+            String line = iter.next().toString() + "\n";
+            fw.write(line);
+            fw.flush();
+        }
+        fw.close();
+    }
+
+    public void outNotebookRewrite() throws IOException {
+        FileWriter fw = new FileWriter("zooClub.txt");
+        Iterator<Map.Entry<Person, List<Pets>>> iter = zooClub.entrySet().iterator();
+        while (iter.hasNext()) {
+            String line = iter.next().toString() + "\n";
+            fw.write(line);
+            fw.flush();
+        }
+        fw.close();
+    }
+
+    public String forWrite() {
+        return zooClub + "\n";
+
     }
 
     @Override
