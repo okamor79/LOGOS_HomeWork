@@ -1,6 +1,6 @@
 package JavaCore_HomeWork15;
 
-public class Pets {
+public class Pets implements ZooClubInterface {
     private String petsName;
     private String petsClass;
     private int petsAge;
@@ -9,6 +9,11 @@ public class Pets {
         this.petsName = petsName;
         this.petsClass = petsClass;
         this.petsAge = petsAge;
+    }
+
+    @Override
+    public String forWrite() {
+        return petsClass + "->" + petsName + "->" + petsAge + "\n";
     }
 
     public String getPetsName() {
@@ -66,10 +71,6 @@ public class Pets {
         } else if (!petsName.equals(other.petsName))
             return false;
         return true;
-    }
-
-    public String forWrite() {
-        return petsClass + "%%" + petsName + "%%" + petsAge + "\n";
     }
 
     @Override

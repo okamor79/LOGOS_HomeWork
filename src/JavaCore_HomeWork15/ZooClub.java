@@ -2,9 +2,7 @@ package JavaCore_HomeWork15;
 
 import com.sun.org.apache.xpath.internal.SourceTree;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Serializable;
+import java.io.*;
 import java.util.*;
 
 public class ZooClub implements Serializable {
@@ -18,7 +16,7 @@ public class ZooClub implements Serializable {
         zooClub = new HashMap<>();
     }
 
-    public void Start() throws IOException {
+    public void Start() throws Exception {
         while (true) {
             printMenu();
             switch (sc.next()) {
@@ -41,7 +39,7 @@ public class ZooClub implements Serializable {
                     fileStreamMenu();
                     break;
                 case "9":
-                    System.out.println(zooClub);
+                    System.out.println(zooClub.toString());
                     break;
                 case "0":
                     return;
@@ -130,7 +128,7 @@ public class ZooClub implements Serializable {
         }
     }
 
-    public void fileStreamMenu() throws IOException {
+    public void fileStreamMenu() throws Exception {
         while (true) {
             System.out.println();
             System.out.println("1 - Дописати в блокнот");
@@ -143,10 +141,13 @@ public class ZooClub implements Serializable {
             System.out.printf("Оберіть дію:  ");
             switch (sc.next()) {
                 case "1":
-                    outNotebookAppend();
+                    outZooClubToFile(true);
                     break;
                 case "2":
-                    outNotebookRewrite();
+                    outZooClubToFile(false);
+                    break;
+                case "3":
+                    importFromFile();
                     break;
                 case "0":
                     return;
@@ -171,32 +172,62 @@ public class ZooClub implements Serializable {
         }
     }
 
-
-    public void outNotebookAppend() throws IOException {
-        FileWriter fw = new FileWriter("zooClub.txt", true);
-        Iterator<Map.Entry<Person, List<Pets>>> iter = zooClub.entrySet().iterator();
-        while (iter.hasNext()) {
-            String line = iter.next().toString() + "\n";
-            fw.write(line);
-            fw.flush();
+    public void outZooClubToFile(boolean b) throws Exception {
+        FileWriter fw = new FileWriter("zooClub.backup", b);
+        try {
+            Iterator<Map.Entry<Person, List<Pets>>> i = zooClub.entrySet().iterator();
+            while (i.hasNext()) {
+                Map.Entry<Person, List<Pets>> m = i.next();
+                String outPerson = String.valueOf(m.getKey().forWrite());
+                Iterator<Pets> iterPets = m.getValue().iterator();
+                while (iterPets.hasNext()) {
+                    String outPets = String.valueOf(iterPets.next().forWrite());
+                    fw.write(outPerson + outPets);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            fw.close();
         }
-        fw.close();
     }
 
-    public void outNotebookRewrite() throws IOException {
-        FileWriter fw = new FileWriter("zooClub.txt");
-        Iterator<Map.Entry<Person, List<Pets>>> iter = zooClub.entrySet().iterator();
-        while (iter.hasNext()) {
-            String line = iter.next().toString() + "\n";
-            fw.write(line);
-            fw.flush();
+    /*
+    * Читаємо з файлу і генеруємо обєкти і лісти до обєекта
+    * */
+    public void importFromFile() throws Exception {
+        FileReader fr = new FileReader("zooClub.backup");
+        try {
+            BufferedReader br = new BufferedReader(fr);
+            String readLine;
+            Person p = null;
+            while ((readLine = br.readLine()) != null) {
+                for (String pars : readLine.split("=>")) {
+                    System.out.println(pars);
+                    if (!pars.contains("->") && pars != null) {
+                        if (!zooClub.containsKey(new Person(pars))) {
+                            p = new Person(pars);
+                            zooClub.put(p, new ArrayList<>());
+                        } else {
+                            p = new Person(pars);
+                        }
+                    } else {
+                        String[] petElement = new String[3];
+                        int i = 0;
+                        for (String parsPet : pars.split("->")) {
+                            petElement[i++] = parsPet;
+                        }
+                        System.out.println(p.getPersonName() + " " + petElement[0] + " " + petElement[1] + " " + petElement[2]);
+                        zooClub.get(p).add(new Pets(petElement[1], petElement[0], Integer.parseInt(petElement[2])));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            System.out.println(zooClub);
+            fr.close();
         }
-        fw.close();
-    }
-
-    public String forWrite() {
-        return zooClub + "\n";
-
     }
 
     @Override

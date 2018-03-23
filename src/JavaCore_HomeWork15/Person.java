@@ -2,7 +2,7 @@ package JavaCore_HomeWork15;
 
 import java.util.Objects;
 
-public class Person {
+public class Person implements ZooClubInterface {
     private String personName;
 
     public Person() {
@@ -18,6 +18,11 @@ public class Person {
 
     public void setPersonName(String personName) {
         this.personName = personName;
+    }
+
+    @Override
+    public String forWrite() {
+        return personName + "=>";
     }
 
     @Override
