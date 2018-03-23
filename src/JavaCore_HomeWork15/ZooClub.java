@@ -153,7 +153,6 @@ public class ZooClub implements Serializable {
                     return;
             }
         }
-//        System.out.println("sfsf");
     }
 
     public void removePets() {
@@ -171,6 +170,11 @@ public class ZooClub implements Serializable {
             }
         }
     }
+
+    /*
+    * Export our Map to text file  in format:  Person=>PetClass->PetName->PetAge
+    * Input Parametr is boolean flag: true - Append file open; false - Rewrite file open
+    * */
 
     public void outZooClubToFile(boolean b) throws Exception {
         FileWriter fw = new FileWriter("zooClub.backup", b);
@@ -193,7 +197,7 @@ public class ZooClub implements Serializable {
     }
 
     /*
-    * Читаємо з файлу і генеруємо обєкти і лісти до обєекта
+    * Read file and generate persons and there pets of ZooClub
     * */
     public void importFromFile() throws Exception {
         FileReader fr = new FileReader("zooClub.backup");
@@ -203,7 +207,6 @@ public class ZooClub implements Serializable {
             Person p = null;
             while ((readLine = br.readLine()) != null) {
                 for (String pars : readLine.split("=>")) {
-                    System.out.println(pars);
                     if (!pars.contains("->") && pars != null) {
                         if (!zooClub.containsKey(new Person(pars))) {
                             p = new Person(pars);
@@ -217,7 +220,6 @@ public class ZooClub implements Serializable {
                         for (String parsPet : pars.split("->")) {
                             petElement[i++] = parsPet;
                         }
-                        System.out.println(p.getPersonName() + " " + petElement[0] + " " + petElement[1] + " " + petElement[2]);
                         zooClub.get(p).add(new Pets(petElement[1], petElement[0], Integer.parseInt(petElement[2])));
                     }
                 }
