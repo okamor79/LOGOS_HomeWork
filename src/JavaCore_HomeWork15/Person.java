@@ -1,8 +1,9 @@
 package JavaCore_HomeWork15;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Person implements ZooClubInterface {
+public class Person implements ZooClubInterface, Serializable {
     private String personName;
 
     public Person() {

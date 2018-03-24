@@ -149,6 +149,12 @@ public class ZooClub implements Serializable {
                 case "3":
                     importFromFile();
                     break;
+                case "4":
+                    exportFileStream();
+                    break;
+                case "5":
+                    importFileStream();
+                    break;
                 case "0":
                     return;
             }
@@ -172,9 +178,39 @@ public class ZooClub implements Serializable {
     }
 
     /*
-    * Export our Map to text file  in format:  Person=>PetClass->PetName->PetAge
-    * Input Parametr is boolean flag: true - Append file open; false - Rewrite file open
-    * */
+     *
+     * */
+    public void exportFileStream() throws Exception {
+        FileOutputStream fos = new FileOutputStream("zooClub.stream.backup");
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        try {
+            oos.writeObject(zooClub);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            fos.close();
+            oos.close();
+        }
+    }
+
+    public void importFileStream() throws Exception {
+        FileInputStream fis = new FileInputStream("zooClub.stream.backup");
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        try {
+            HashMap<Person, List<Pets>> hm = (HashMap<Person, List<Pets>>) ois.readObject();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            System.out.println(zooClub);
+            fis.close();
+            ois.close();
+        }
+    }
+
+    /*
+     * Export our Map to text file  in format:  Person=>PetClass->PetName->PetAge
+     * Input Parametr is boolean flag: true - Append file open; false - Rewrite file open
+     * */
 
     public void outZooClubToFile(boolean b) throws Exception {
         FileWriter fw = new FileWriter("zooClub.backup", b);
@@ -197,12 +233,12 @@ public class ZooClub implements Serializable {
     }
 
     /*
-    * Read file and generate persons and there pets of ZooClub
-    * */
+     * Read file and generate persons and there pets of ZooClub
+     * */
     public void importFromFile() throws Exception {
         FileReader fr = new FileReader("zooClub.backup");
+        BufferedReader br = new BufferedReader(fr);
         try {
-            BufferedReader br = new BufferedReader(fr);
             String readLine;
             Person p = null;
             while ((readLine = br.readLine()) != null) {
@@ -227,8 +263,8 @@ public class ZooClub implements Serializable {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            System.out.println(zooClub);
             fr.close();
+            br.close();
         }
     }
 

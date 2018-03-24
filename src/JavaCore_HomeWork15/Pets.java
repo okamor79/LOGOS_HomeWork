@@ -1,6 +1,8 @@
 package JavaCore_HomeWork15;
 
-public class Pets implements ZooClubInterface {
+import java.io.Serializable;
+
+public class Pets implements ZooClubInterface, Serializable {
     private String petsName;
     private String petsClass;
     private int petsAge;
