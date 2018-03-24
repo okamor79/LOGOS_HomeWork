@@ -178,7 +178,7 @@ public class ZooClub implements Serializable {
     }
 
     /*
-     *
+     *  Export ZooClub Map to Stream
      * */
     public void exportFileStream() throws Exception {
         FileOutputStream fos = new FileOutputStream("zooClub.stream.backup");
@@ -193,11 +193,14 @@ public class ZooClub implements Serializable {
         }
     }
 
+    /*
+     *  Import ZooClub Map from Stream
+     * */
     public void importFileStream() throws Exception {
         FileInputStream fis = new FileInputStream("zooClub.stream.backup");
         ObjectInputStream ois = new ObjectInputStream(fis);
         try {
-            HashMap<Person, List<Pets>> hm = (HashMap<Person, List<Pets>>) ois.readObject();
+            zooClub = (HashMap) ois.readObject();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
