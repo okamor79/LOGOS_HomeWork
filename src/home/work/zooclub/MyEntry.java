@@ -1,4 +1,4 @@
-package JavaCore_HomeWork15;
+package home.work.zooclub;
 
 import java.util.Objects;
 

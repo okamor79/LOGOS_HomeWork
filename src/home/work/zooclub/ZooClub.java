@@ -1,6 +1,4 @@
-package JavaCore_HomeWork15;
-
-import com.sun.org.apache.xpath.internal.SourceTree;
+package home.work.zooclub;
 
 import java.io.*;
 import java.util.*;
@@ -214,7 +212,6 @@ public class ZooClub implements Serializable {
      * Export our Map to text file  in format:  Person=>PetClass->PetName->PetAge
      * Input Parametr is boolean flag: true - Append file open; false - Rewrite file open
      * */
-
     public void outZooClubToFile(boolean b) throws Exception {
         FileWriter fw = new FileWriter("zooClub.backup", b);
         try {
