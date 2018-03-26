@@ -1,4 +1,4 @@
-package JavaCore_HomeWork13;
+package home.work.lists;
 
 import java.util.Objects;
 

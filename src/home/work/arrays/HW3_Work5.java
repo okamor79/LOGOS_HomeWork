@@ -1,4 +1,4 @@
-package JavaCore_HomeWork3;
+package home.work.arrays;
 
 import java.util.Random;
 

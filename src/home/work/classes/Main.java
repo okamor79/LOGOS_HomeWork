@@ -1,4 +1,4 @@
-package JavaCore_HomeWork16;
+package home.work.classes;
 
 public class Main {
     public static void main(String[] args) {

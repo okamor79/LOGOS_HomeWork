@@ -1,4 +1,4 @@
-package JavaCore_HomeWork3;
+package home.work.arrays;
 
 public class HW3_Work1 {
     public static void main(String[] args) {
