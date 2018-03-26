@@ -5,9 +5,10 @@ import java.util.Scanner;
 public class MyThread extends Thread {
 
     private int cnt;
+    Scanner sc =new Scanner(System.in);
 
-    public MyThread(int i) {
-        cnt = i;
+    public MyThread(){
+
     }
 
     int fibonachi(int n) {
@@ -16,8 +17,10 @@ public class MyThread extends Thread {
 
     @Override
     public void run() {
+        System.out.println("Enter Thear Fibon Number  ");
+        cnt = sc.nextInt();
         for (int i = 1; i <= cnt; i++) {
-            System.out.println(fibonachi(i));
+            System.out.printf(fibonachi(i)+" ");
             try {
                 sleep(1000);
             } catch (InterruptedException e) {
