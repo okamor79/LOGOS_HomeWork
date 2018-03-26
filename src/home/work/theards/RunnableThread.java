@@ -2,11 +2,11 @@ package home.work.theards;
 
 import java.util.Scanner;
 
-public class MyThread extends Thread {
+public class RunnableThread implements Runnable {
 
     private int cnt;
 
-    public MyThread(int i) {
+    public RunnableThread(int i) {
         cnt = i;
     }
 
@@ -16,13 +16,12 @@ public class MyThread extends Thread {
 
     @Override
     public void run() {
-        for (int i = 1; i <= cnt; i++) {
+        for (int i = cnt; i >= 1; i--) {
             System.out.println(fibonachi(i));
             try {
-                sleep(1000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-    }
-}
+    }}
