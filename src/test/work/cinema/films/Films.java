@@ -1,4 +1,6 @@
-package test.work.cinema;
+package test.work.cinema.films;
+
+import test.work.cinema.exception.ValidationMessages;
 
 import java.io.*;
 import java.util.*;
@@ -64,41 +66,45 @@ public class Films implements Serializable {
 
     @Override
     public String toString() {
-        return  id + "   \"" + nameFilm + '\"' +
+        return id + "   \"" + nameFilm + '\"' +
                 "  Genre: " + genreFilm +
                 "  Time Length: " + timeFilmLength +
                 "  Year Production: " + yearFilmProduction;
     }
 
     public void start() throws Exception {
-        while (true) {
-            System.out.println();
-            filmMenuActionPrint();
-            switch (sc.next()) {
-                case "1":
-                    addNewFilm();
-                    break;
-                case "2":
-                    removeFilm();
-                    break;
-                case "3":
-                    exportToStream();
-                    break;
-                case "4":
-                    importFromStream();
-                    break;
-                case "5":
-                    if (!film.isEmpty()) {
-                        listActualMovie();
-                    } else {
-                        System.out.println();
-                        System.out.println("Base is empty. Please import or input manual..");
-                    }
+        try {
+            while (true) {
+                System.out.println();
+                filmMenuActionPrint();
+                switch (sc.next()) {
+                    case "1":
+                        addNewFilm();
+                        break;
+                    case "2":
+                        removeFilm();
+                        break;
+                    case "3":
+                        exportToStream();
+                        break;
+                    case "4":
+                        importFromStream();
+                        break;
+                    case "5":
+                        if (!film.isEmpty()) {
+                            listActualMovie();
+                        } else {
+                            System.out.println();
+                            System.out.println("Base is empty. Please import or input manual..");
+                        }
 
-                    break;
-                case "0":
-                    return;
+                        break;
+                    case "0":
+                        return;
+                }
             }
+        } catch (InputMismatchException e) {
+            System.err.printf(ValidationMessages.INPUT_MISMATCH);
         }
     }
 
@@ -116,7 +122,7 @@ public class Films implements Serializable {
         System.out.printf("Choose action: ");
     }
 
-    void addNewFilm() {
+    void addNewFilm() throws Exception {
         Scanner s = new Scanner(System.in);
         System.out.printf("Plase enter a new film name: ");
         String newFilmName = s.nextLine();
@@ -127,6 +133,7 @@ public class Films implements Serializable {
         System.out.printf("Plase enter a new film year production: ");
         int newFilmYearProduction = s.nextInt();
         film.add(new Films(newFilmName, newFilmGenre, newFilmTimeLength, newFilmYearProduction));
+        s.close();
     }
 
     void removeFilm() throws Exception {
@@ -141,7 +148,6 @@ public class Films implements Serializable {
                     iter.remove();
                 }
             }
-            exportToStream();
         } else {
             System.out.println();
             System.out.println("Base is empty. Please import or input manual..");

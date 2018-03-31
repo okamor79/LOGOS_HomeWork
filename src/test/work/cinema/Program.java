@@ -1,5 +1,7 @@
 package test.work.cinema;
 
+import test.work.cinema.films.Films;
+
 public class Program {
     public static void main(String[] args) throws Exception {
 
