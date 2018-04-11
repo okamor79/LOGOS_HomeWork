@@ -36,10 +36,7 @@ public class Shedule {
 
     @Override
     public String toString() {
-        return "Shedule{" +
-                "date=" + date +
-                ", time=" + time +
-                '}';
+        return date + "    " + time;
     }
 
     @Override
