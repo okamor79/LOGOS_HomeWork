@@ -1,5 +1,8 @@
 package JavaCore_TestWork_Cinema;
 
+import jdk.jfr.events.FileWriteEvent;
+
+import java.io.*;
 import java.util.*;
 
 public class Hall {
@@ -7,10 +10,10 @@ public class Hall {
     private String nameHall;
     private String addressHall;
 
-    private List<Hall> hall;
+    private HashSet<Hall> hall;
 
     public Hall() {
-        hall = new ArrayList<>();
+        hall = new HashSet<>();
     }
 
     public Hall(String nameHall, String addressHall) {
@@ -53,6 +56,11 @@ public class Hall {
                 case "1":
                     addNewItem();
                     break;
+                case "2": writeToFile(); break;
+                case "3": loadFromFile(); break;
+                case "9":
+                    hall.forEach(System.out::println);
+                    break;
                 case "0":
                     return;
             }
@@ -63,6 +71,9 @@ public class Hall {
     void menu() {
         System.out.println("-----------------------");
         System.out.println(" 1. Add new item");
+        System.out.println(" 2. Write to File");
+        System.out.println(" 3. Load from File");
+        System.out.println(" 9. Print list");
         System.out.println(" 0. Exit previors");
         System.out.println("------------------------");
         System.out.printf("  Select action:  ");
@@ -70,7 +81,61 @@ public class Hall {
 
     void addNewItem() {
         System.out.printf(" Enter hall name ");
-        String
+        String hallName = new Scanner(System.in).nextLine();
+        System.out.printf(" Enter hall address ");
+        String hallAddress = new Scanner(System.in).nextLine();
+        if (!hall.contains(hallName)) {
+            hall.add(new Hall(hallName, hallAddress));
+        } else {
+            System.out.println("Hall exist");
+        }
+    }
+
+    void loadFromFile() throws Exception {
+        File f = new File("hall.txt");
+        if (!f.exists()) {
+            System.out.println("File does not exist");
+            return;
+        } else {
+            FileReader fr = new FileReader(f);
+            BufferedReader br = new BufferedReader(fr);
+            try {
+                String readLine;
+                while ((readLine = br.readLine()) != null) {
+                    String[] arr = new String[2];
+                    int i = 0;
+                    for (String tempLine : readLine.split("->")) {
+                        arr[i++] = tempLine;
+                    }
+                    hall.add(new Hall(arr[0], arr[1]));
+                }
+
+            } catch (Exception e){
+                e.printStackTrace();
+            } finally {
+                fr.close();
+                br.close();
+            }
+        }
+    }
+
+    void writeToFile() throws Exception {
+        File f = new File("hall.txt");
+        FileWriter fw = new FileWriter(f);
+        BufferedWriter bw = new BufferedWriter(fw);
+        try {
+            Iterator<Hall> iter = hall.iterator();
+            while (iter.hasNext()) {
+                Hall h = iter.next();
+                fw.write(h.nameHall + "->" + h.addressHall + '\n');
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            fw.close();
+            bw.close();
+        }
+
 
     }
 }
