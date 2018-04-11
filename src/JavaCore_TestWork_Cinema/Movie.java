@@ -101,9 +101,9 @@ public class Movie {
     }
 
     void addNewMovie() {
-        System.out.println("Enter film name");
+        System.out.printf("Enter film name  ");
         String movName = new Scanner(System.in).nextLine();
-        System.out.println("Enter film year");
+        System.out.printf("Enter film year  ");
         int movYear = new Scanner(System.in).nextInt();
 
         if (!movie.contains(movName)) {
