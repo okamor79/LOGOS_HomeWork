@@ -74,7 +74,6 @@ public class Shedule {
         System.out.println("1. Add new");
         System.out.println("2. Write to File");
         System.out.println("3. Load from file");
-        System.out.println("4. Remove exist");
         System.out.println("9. Print list");
         System.out.println("0. Exit previors");
         System.out.println("--------------------------------");
