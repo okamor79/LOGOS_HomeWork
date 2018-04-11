@@ -124,7 +124,6 @@ public class Shedule {
         }
     }
 
-
     void writeToFile() throws Exception {
         File f = new File("shedule.txt");
 
@@ -143,5 +142,6 @@ public class Shedule {
             bw.close();
         }
     }
+
 
 }

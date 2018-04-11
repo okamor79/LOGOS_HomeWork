@@ -19,7 +19,10 @@ public class Adminka {
                     Shedule sh = new Shedule();
                     sh.start();
                     break;
-
+                case "3":
+                    Hall h = new Hall();
+                    h.start();
+                    break;
                 case "0":
                     return;
             }
@@ -30,6 +33,7 @@ public class Adminka {
         System.out.println("----------------------");
         System.out.println(" 1. Admin films");
         System.out.println(" 2. Admin Shedule");
+        System.out.println(" 3. Admin Hall");
         System.out.println(" 0. Exit program");
         System.out.println("----------------------");
         System.out.printf(" Select action:  ");
