@@ -5,6 +5,7 @@ import java.util.*;
 
 public class Movie {
 
+    private int id;
     private String movieName;
     private int yearMovie;
 
@@ -14,9 +15,20 @@ public class Movie {
         movie = new ArrayList<>();
     }
 
-    public Movie(String movieName, int yearMovie) {
+    public Movie(int id, String movieName, int yearMovie) {
+        this.id = id;
         this.movieName = movieName;
         this.yearMovie = yearMovie;
+    }
+
+    public Movie(String movieName, int yearMovie) {
+        this.id = new Random().nextInt(98) + 1;
+        this.movieName = movieName;
+        this.yearMovie = yearMovie;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getMovieName() {
@@ -37,10 +49,7 @@ public class Movie {
 
     @Override
     public String toString() {
-        return "Movie{" +
-                "movieName='" + movieName + '\'' +
-                ", yearMovie=" + yearMovie +
-                '}';
+        return id + "\t" + movieName + "\t\t" + yearMovie;
     }
 
     @Override
@@ -48,13 +57,15 @@ public class Movie {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Movie movie = (Movie) o;
-        return yearMovie == movie.yearMovie &&
+        return id == movie.id &&
+                yearMovie == movie.yearMovie &&
                 Objects.equals(movieName, movie.movieName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(movieName, yearMovie);
+
+        return Objects.hash(id, movieName, yearMovie);
     }
 
     public String forWrite() {
@@ -124,12 +135,12 @@ public class Movie {
             try {
                 String readLine;
                 while ((readLine = br.readLine()) != null) {
-                    String[] arr = new String[2];
+                    String[] arr = new String[3];
                     int i = 0;
                     for (String temp : readLine.split("->")) {
                         arr[i++] = temp;
                     }
-                    movie.add(new Movie(arr[0], Integer.valueOf(arr[1])));
+                    movie.add(new Movie(Integer.valueOf(arr[0]), arr[1], Integer.valueOf(arr[2])));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -138,7 +149,6 @@ public class Movie {
                 br.close();
             }
         }
-
     }
 
     void writeToFile() throws Exception {
@@ -150,7 +160,7 @@ public class Movie {
             Iterator<Movie> iter = movie.iterator();
             while (iter.hasNext()) {
                 Movie a = iter.next();
-                fw.write((a.getMovieName() + "->" + a.getYearMovie() + '\n'));
+                fw.write((a.getId() + "->" + a.getMovieName() + "->" + a.getYearMovie() + '\n'));
             }
         } catch (Exception e) {
             e.printStackTrace();
