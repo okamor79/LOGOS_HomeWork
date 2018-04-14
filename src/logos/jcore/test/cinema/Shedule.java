@@ -56,7 +56,6 @@ public class Shedule implements Serializable {
     }
 
     public void sheduleAdminPanel() throws Exception {
-        shedule =;
         while (true) {
             Menu.menu("shedule");
             switch (new Scanner(System.in).next()) {
