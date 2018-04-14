@@ -1,5 +1,7 @@
 package JavaCore_TestWork_Cinema;
 
+import logos.jcore.test.cinema.Validator;
+
 import java.io.*;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
