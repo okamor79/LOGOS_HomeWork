@@ -20,6 +20,10 @@ public class Admin {
                     Shedule s = new Shedule();
                     s.sheduleAdminPanel();
                     break;
+                case "4":
+                    Session ss = new Session();
+                    ss.adminSessionPanel();
+                    break;
                 case "0":
                     return;
             }

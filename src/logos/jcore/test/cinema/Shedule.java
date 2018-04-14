@@ -20,8 +20,8 @@ public class Shedule implements Serializable {
 
     transient private HashSet<Shedule> shedule;
 
-    public Shedule() {
-        shedule = new HashSet<>();
+    public Shedule() throws Exception {
+        shedule = new HashSet<>((HashSet<Shedule>) Methods.loadFromFile(FILE_NAME));
     }
 
     public Shedule(LocalDateTime dateTime) {
@@ -56,7 +56,7 @@ public class Shedule implements Serializable {
     }
 
     public void sheduleAdminPanel() throws Exception {
-        shedule = (HashSet<Shedule>) Methods.loadFromFile(FILE_NAME);
+        shedule =;
         while (true) {
             Menu.menu("shedule");
             switch (new Scanner(System.in).next()) {
@@ -76,7 +76,6 @@ public class Shedule implements Serializable {
     }
 
     void addNewShwdule() throws Exception {
-        shedule = (HashSet<Shedule>) Methods.loadFromFile(FILE_NAME);
         shedule.forEach(System.out::println);
         System.out.printf("Enter date (dd.mm.yyyy)");
         String strDate = new Scanner(System.in).nextLine();
@@ -96,7 +95,6 @@ public class Shedule implements Serializable {
     }
 
     void removeShedule() throws Exception {
-        shedule = (HashSet<Shedule>) Methods.loadFromFile(FILE_NAME);
         shedule.forEach(System.out::println);
         System.out.printf("Enter date to delete from list (dd.mm.yyyy) ");
         String delDate = new Scanner(System.in).nextLine();

@@ -18,8 +18,8 @@ public class Movie implements Serializable {
         this.name = name;
     }
 
-    public Movie() {
-        movie = new HashSet<>();
+    public Movie() throws Exception{
+        movie = new HashSet<>((HashSet<Movie>) Methods.loadFromFile(FILE_NAME))  ;
     }
 
     @Override
@@ -71,7 +71,6 @@ public class Movie implements Serializable {
     }
 
     void addNewMovie() throws Exception {
-        movie = (HashSet<Movie>) Methods.loadFromFile(FILE_NAME);
         System.out.printf(" Enter movie name: ");
         String movieName = new Scanner(System.in).nextLine();
         if (!movie.contains(movieName)) {
@@ -87,7 +86,6 @@ public class Movie implements Serializable {
     }
 
     void removeMovie() throws Exception {
-        movie = (HashSet<Movie>) Methods.loadFromFile(FILE_NAME);
         movie.forEach(System.out::println);
         System.out.printf("Enter movie name to delete: ");
         String nameDel = new Scanner(System.in).nextLine();

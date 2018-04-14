@@ -19,8 +19,8 @@ public class Hall implements Serializable {
         this.name = name;
     }
 
-    public Hall() {
-        hall = new HashSet<>();
+    public Hall() throws Exception {
+        hall = new HashSet<>((HashSet<Hall>) Methods.loadFromFile(FILE_NAME));
     }
 
     @Override
@@ -72,7 +72,6 @@ public class Hall implements Serializable {
     }
 
     void addNewHall() throws Exception {
-        hall = (HashSet<Hall>) Methods.loadFromFile(FILE_NAME);
         System.out.printf(" Enter hall name: ");
         String hallName = new Scanner(System.in).nextLine();
         if (!hall.contains(hallName)) {
@@ -88,7 +87,6 @@ public class Hall implements Serializable {
     }
 
     void removeHall() throws Exception {
-        hall = (HashSet<Hall>) Methods.loadFromFile(FILE_NAME);
         hall.forEach(System.out::println);
         System.out.printf("Enter movie name to delete: ");
         String nameDel = new Scanner(System.in).nextLine();
