@@ -1,4 +1,4 @@
-package logos.jcore.test.cinema;
+package logos.jcore.test.cinema.utils;
 
 import java.util.regex.Pattern;
 

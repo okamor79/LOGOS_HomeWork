@@ -18,6 +18,7 @@ public class Session implements Serializable {
     private HashSet<Shedule> shedules;
 
     private Map<Shedule, List<Session>> seans;
+    private Session session;
 
     public Session(Movie movie, Hall hall) {
         this.movie = movie;
@@ -28,8 +29,9 @@ public class Session implements Serializable {
 
         movies = new HashSet<>((HashSet<Movie>) Methods.loadFromFile(Movie.FILE_NAME));
         halls = new HashSet<>((HashSet<Hall>) Methods.loadFromFile(Hall.FILE_NAME));
-        shedules = new HashSet<>();
-        //  seans = new HashMap<>((HashMap<Shedule, List<Session>>) Methods.loadFromFile(FILE_NAME));
+        shedules = new HashSet<>((HashSet<Shedule>) Methods.loadFromFile(Shedule.FILE_NAME) );
+        seans = new HashMap<>();
+        //  seans = new HashMap<>((HashMap<List<Session>, Shedule>) Methods.loadFromFile(FILE_NAME));
     }
 
     public Movie getMovie() {
@@ -57,6 +59,10 @@ public class Session implements Serializable {
                 Objects.equals(hall, session.hall);
     }
 
+    public Session getSession() {
+        return this.session;
+    }
+    
     @Override
     public int hashCode() {
         return Objects.hash(movie, hall);
@@ -84,7 +90,7 @@ public class Session implements Serializable {
     }
 
     void addNewSession() throws Exception {
-        Session session = null;
+        List<Session> session = new ArrayList<>();
         if (!movies.isEmpty() && !halls.isEmpty()) {
             System.out.println("To create a session, you need to select from list's a movie, a hall and a viewing time");
             System.out.println("Movie list");
@@ -104,14 +110,44 @@ public class Session implements Serializable {
                     while (iterHall.hasNext()) {
                         Hall ih =iterHall.next();
                         if (ih.getName().equalsIgnoreCase(hallName)) {
-                            session = new Session(im, ih);
+                            session.add(new Session(im, ih));
                         }
                     }
                 }
             }
+            if (!shedules.isEmpty()) {
+                System.out.println("Shedule list");
+                shedules.forEach(System.out::println);
+                System.out.printf("Select date and time from list to movie shoving");
+                String seansDateTime = new Scanner(System.in).nextLine();
+                Iterator<Shedule> iterShedule = shedules.iterator();
+                while (iterShedule.hasNext()) {
+                    Shedule sh = iterShedule.next();
+//                    System.out.println(sh.getDateTime().format(Shedule.FORMATTER));
+                    if (sh.getDateTime().format(Shedule.FORMATTER).equalsIgnoreCase(seansDateTime)) {
+                        System.out.println("kva");
+                        seans.put(sh, session);
+                    }
+                }
+
+
+//                if (seans.containsKey(session)) {
+//                    System.out.println("sdhf");
+//                    Iterator<Shedule> iterShedule = shedules.iterator();
+//                    while (iterShedule.hasNext()) {
+//                        Shedule sh = iterShedule.next();
+//                        System.out.println(sh.getDateTime());
+//                        //if (sh.getDateTime().format(Shedule.DATETIME_FORMAT)) {}
+
+//                    seans.put(session,)
+
+
+            }
         }
 
-        System.out.println(session);
+     //   seans.forEach(System.out::println);
+
+        System.out.println(seans);
 
 
 //        Map<Shedule, List<Session>> session =

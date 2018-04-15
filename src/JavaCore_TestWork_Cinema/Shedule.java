@@ -1,6 +1,6 @@
 package JavaCore_TestWork_Cinema;
 
-import logos.jcore.test.cinema.Validator;
+import logos.jcore.test.cinema.utils.Validator;
 
 import java.io.*;
 import java.time.*;

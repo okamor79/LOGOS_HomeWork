@@ -1,5 +1,7 @@
 package logos.jcore.test.cinema;
 
+import logos.jcore.test.cinema.utils.Validator;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
