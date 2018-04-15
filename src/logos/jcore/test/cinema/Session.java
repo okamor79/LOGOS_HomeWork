@@ -1,10 +1,8 @@
 package logos.jcore.test.cinema;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Objects;
-import java.util.Scanner;
+import java.sql.SQLOutput;
+import java.util.*;
 
 public class Session implements Serializable {
 
@@ -17,6 +15,9 @@ public class Session implements Serializable {
 
     private HashSet<Movie> movies;
     private HashSet<Hall> halls;
+    private HashSet<Shedule> shedules;
+
+    private Map<Shedule, List<Session>> seans;
 
     public Session(Movie movie, Hall hall) {
         this.movie = movie;
@@ -24,8 +25,11 @@ public class Session implements Serializable {
     }
 
     public Session() throws Exception {
-        movies = new HashSet<>();
-        halls = new HashSet<>();
+
+        movies = new HashSet<>((HashSet<Movie>) Methods.loadFromFile(Movie.FILE_NAME));
+        halls = new HashSet<>((HashSet<Hall>) Methods.loadFromFile(Hall.FILE_NAME));
+        shedules = new HashSet<>();
+        //  seans = new HashMap<>((HashMap<Shedule, List<Session>>) Methods.loadFromFile(FILE_NAME));
     }
 
     public Movie getMovie() {
@@ -55,7 +59,6 @@ public class Session implements Serializable {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(movie, hall);
     }
 
@@ -78,23 +81,54 @@ public class Session implements Serializable {
                     return;
             }
         }
-
     }
 
     void addNewSession() throws Exception {
-        movies = (HashSet<Movie>) Methods.loadFromFile(Movie.FILE_NAME);
-        if (!movies.isEmpty()) {
+        Session session = null;
+        if (!movies.isEmpty() && !halls.isEmpty()) {
+            System.out.println("To create a session, you need to select from list's a movie, a hall and a viewing time");
+            System.out.println("Movie list");
             movies.forEach(System.out::println);
-            System.out.printf("Select and enter movie name ");
+            System.out.printf("Please select a movie that has entered its name: ");
             String movieName = new Scanner(System.in).nextLine();
+            System.out.println();
+            System.out.println("Hall list");
+            halls.forEach(System.out::println);
+            System.out.printf("Please select the hall entered its name: ");
+            String hallName = new Scanner(System.in).nextLine();
             Iterator<Movie> iterMovie = movies.iterator();
             while (iterMovie.hasNext()) {
-                if (iterMovie.next().getName().equalsIgnoreCase(movieName)) {
-                    System.err.println("asdfadsf");
+                Movie im =iterMovie.next();
+                if (im.getName().equalsIgnoreCase(movieName)) {
+                    Iterator<Hall> iterHall = halls.iterator();
+                    while (iterHall.hasNext()) {
+                        Hall ih =iterHall.next();
+                        if (ih.getName().equalsIgnoreCase(hallName)) {
+                            session = new Session(im, ih);
+                        }
+                    }
                 }
             }
-        } else {
-            System.out.println("Not films ");
         }
+
+        System.out.println(session);
+
+
+//        Map<Shedule, List<Session>> session =
+
+
+//        if (!movies.isEmpty()) {
+//            movies.forEach(System.out::println);
+//            System.out.printf("Select and enter movie name ");
+//            String movieName = new Scanner(System.in).nextLine();
+//            Iterator<Movie> iterMovie = movies.iterator();
+//            while (iterMovie.hasNext()) {
+//                if (iterMovie.next().getName().equalsIgnoreCase(movieName)) {
+//                    System.err.println("asdfadsf");
+//                }
+//            }
+//        } else {
+//            System.out.println("Not films ");
+//        }
     }
 }
