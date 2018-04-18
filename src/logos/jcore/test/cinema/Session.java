@@ -17,7 +17,7 @@ public class Session implements Serializable {
     private HashSet<Hall> halls;
     private HashSet<Shedule> shedules;
 
-    private Map<Shedule, List<Session>> seans;
+    private Map<Shedule, List<Session>> seans = new HashMap<>();
     private Session session;
 
     public Session(Movie movie, Hall hall) {
@@ -29,9 +29,12 @@ public class Session implements Serializable {
 
         movies = new HashSet<>((HashSet<Movie>) Methods.loadFromFile(Movie.FILE_NAME));
         halls = new HashSet<>((HashSet<Hall>) Methods.loadFromFile(Hall.FILE_NAME));
-        shedules = new HashSet<>((HashSet<Shedule>) Methods.loadFromFile(Shedule.FILE_NAME) );
-        seans = new HashMap<>();
-        //  seans = new HashMap<>((HashMap<List<Session>, Shedule>) Methods.loadFromFile(FILE_NAME));
+        shedules = new HashSet<>((HashSet<Shedule>) Methods.loadFromFile(Shedule.FILE_NAME));
+        try {
+            seans = (HashMap) Methods.loadFromFile(FILE_NAME);
+        } catch (Exception e) {
+            System.err.println("File " + FILE_NAME + " is empty.");
+        }
     }
 
     public Movie getMovie() {
@@ -62,7 +65,7 @@ public class Session implements Serializable {
     public Session getSession() {
         return this.session;
     }
-    
+
     @Override
     public int hashCode() {
         return Objects.hash(movie, hall);
@@ -82,6 +85,9 @@ public class Session implements Serializable {
             switch (new Scanner(System.in).next()) {
                 case "1":
                     addNewSession();
+                    break;
+                case "3":
+                    System.out.println(seans);
                     break;
                 case "0":
                     return;
@@ -104,11 +110,11 @@ public class Session implements Serializable {
             String hallName = new Scanner(System.in).nextLine();
             Iterator<Movie> iterMovie = movies.iterator();
             while (iterMovie.hasNext()) {
-                Movie im =iterMovie.next();
+                Movie im = iterMovie.next();
                 if (im.getName().equalsIgnoreCase(movieName)) {
                     Iterator<Hall> iterHall = halls.iterator();
                     while (iterHall.hasNext()) {
-                        Hall ih =iterHall.next();
+                        Hall ih = iterHall.next();
                         if (ih.getName().equalsIgnoreCase(hallName)) {
                             session.add(new Session(im, ih));
                         }
@@ -123,48 +129,15 @@ public class Session implements Serializable {
                 Iterator<Shedule> iterShedule = shedules.iterator();
                 while (iterShedule.hasNext()) {
                     Shedule sh = iterShedule.next();
-//                    System.out.println(sh.getDateTime().format(Shedule.FORMATTER));
                     if (sh.getDateTime().format(Shedule.FORMATTER).equalsIgnoreCase(seansDateTime)) {
                         System.out.println("kva");
+                        System.out.println(sh);
+                        System.out.println(session);
                         seans.put(sh, session);
+                        Methods.writeToFile(FILE_NAME, seans);
                     }
                 }
-
-
-//                if (seans.containsKey(session)) {
-//                    System.out.println("sdhf");
-//                    Iterator<Shedule> iterShedule = shedules.iterator();
-//                    while (iterShedule.hasNext()) {
-//                        Shedule sh = iterShedule.next();
-//                        System.out.println(sh.getDateTime());
-//                        //if (sh.getDateTime().format(Shedule.DATETIME_FORMAT)) {}
-
-//                    seans.put(session,)
-
-
             }
         }
-
-     //   seans.forEach(System.out::println);
-
-        System.out.println(seans);
-
-
-//        Map<Shedule, List<Session>> session =
-
-
-//        if (!movies.isEmpty()) {
-//            movies.forEach(System.out::println);
-//            System.out.printf("Select and enter movie name ");
-//            String movieName = new Scanner(System.in).nextLine();
-//            Iterator<Movie> iterMovie = movies.iterator();
-//            while (iterMovie.hasNext()) {
-//                if (iterMovie.next().getName().equalsIgnoreCase(movieName)) {
-//                    System.err.println("asdfadsf");
-//                }
-//            }
-//        } else {
-//            System.out.println("Not films ");
-//        }
     }
 }

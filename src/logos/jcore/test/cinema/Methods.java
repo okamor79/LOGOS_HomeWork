@@ -43,7 +43,5 @@ public class Methods {
             fos.close();
             oos.close();
         }
-
     }
-
 }
